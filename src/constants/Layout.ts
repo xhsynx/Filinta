@@ -9,4 +9,6 @@ export default {
     height,
   },
   isSmallDevice: width < 375,
+  tabIconBigSize:32,
+  tabIconSmallSize:16
 };

@@ -5,7 +5,7 @@ export const fetchPosts = () => {
   let post: IPost = {
     id: "1",
     content: eContentType.video,
-    url: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+    url: "https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG",
     description: "gfhkfgh",
     user: {
       id: "1",
@@ -19,7 +19,7 @@ export const fetchPosts = () => {
   let post1: IPost = {
     id: "2",
     content: eContentType.video,
-    url: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+    url: "https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG",
     description: "gfhkfgh",
     user: {
       id: "1",

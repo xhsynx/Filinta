@@ -12,12 +12,10 @@ export default function AppHeader(props: StackHeaderTitleProps) {
   return (
     <View style={{ height:56,flexDirection:"row",alignItems:"center",justifyContent:"space-between",backgroundColor:Colors[colorScheme].background}}>
       <View style={{flexDirection:"row",justifyContent:"flex-start",alignItems:"center"}}>
-        <MaterialCommunityIcons name="youtube" color="red" size={32}/>
-        <MonoText style={{fontWeight:"bold",fontSize:24}}>YouTube</MonoText>
+        <MaterialCommunityIcons name="heart" color="red" size={40}/>
+        <MonoText style={{fontWeight:"bold",fontSize:24}}>Filinta</MonoText>
       </View>
       <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-      <MaterialCommunityIcons style={{padding:10}} name="cast" color={Colors.light.tabIconDefault} size={24}/>
-      <EvilIcons style={{padding:10}} name="bell" color={Colors.light.tabIconDefault} size={24}/>
       <EvilIcons style={{padding:10}} name="search" color={Colors.light.tabIconDefault} size={24}/>
       </View>
     </View>

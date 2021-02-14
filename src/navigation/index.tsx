@@ -9,7 +9,7 @@ import { ColorSchemeName } from "react-native";
 import AppHeader from "../components/AppHeader";
 import Colors from "../constants/Colors";
 
-import { RootStackParamList } from "../types";
+import { RootStackParamList } from "../navigation/Types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import useColorScheme from "../hooks/useColorScheme";

@@ -1,8 +1,7 @@
+import * as React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import * as React from "react";
-
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
@@ -13,12 +12,14 @@ import {
   LibraryParamList,
   ShareParamList,
   SubscriptionsParamList,
-} from "../types";
+} from "../navigation/Types";
 import DiscoverScreen from "../screens/DiscoverScreen";
 import ShareScreen from "../screens/ShareScreen";
 import SubscriptionsScreen from "../screens/SubscriptionsScreen";
 import LibraryScreen from "../screens/Libraryscreen";
 import WatchVideoScreen from "../screens/WatchVideoScreen";
+import Layout from "../constants/Layout";
+import { View, ImageBackground } from "react-native";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -29,16 +30,30 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: Colors[colorScheme].tint,
-        tabStyle: { backgroundColor: Colors[colorScheme].background },
+        activeTintColor: Colors[colorScheme].background,
+        tabStyle: {
+          backgroundColor: Colors[colorScheme].bottomTabsBg,
+          marginBottom: 5,
+        },
+        showLabel: false,
+        inactiveTintColor: Colors[colorScheme].tabIconDefault,
+        style: {
+          backgroundColor: Colors[colorScheme].background,
+          borderTopWidth: 0,
+          height: 80,
+        },
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={HomeNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon size={16} name="home" color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarIcon
+              size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
+              name="home"
+              color={color}
+            />
           ),
         }}
       />
@@ -46,8 +61,12 @@ export default function BottomTabNavigator() {
         name="Discover"
         component={DiscoverNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon size={16} name="compass" color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarIcon
+              size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
+              name="map-marker"
+              color={focused ? "#4285F4" : color}
+            />
           ),
         }}
       />
@@ -56,27 +75,50 @@ export default function BottomTabNavigator() {
         component={ShareNavigator}
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon size={32} name="plus-circle-outline" color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarIcon
+              size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
+              name="plus-circle-outline"
+              color={focused ? "#4caf50" : color}
+            />
           ),
-          tabBarVisible: false,
         }}
       />
       <BottomTab.Screen
         name="Subscriptions"
         component={SubscriptionsNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon size={16} name="youtube-subscription" color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarIcon
+              size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
+              name="heart"
+              color={focused ? "red" : color}
+            />
           ),
+          tabBarBadge: 47,
         }}
       />
       <BottomTab.Screen
         name="Library"
         component={LibraryNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon size={16} name="play-box-multiple" color={color} />
+          tabBarIcon: ({ focused, size }) => (
+            <ImageBackground
+              source={{
+                uri:
+                  "https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-2000w.JPG",
+              }}
+              style={{
+                width: focused ? 60 : 30,
+                height: focused ? 60 : 30,
+                borderRadius: 50,
+              }}
+              imageStyle={{
+                borderRadius: 50,
+                borderWidth: focused ? 3 : 1,
+                borderColor: "gray",
+              }}
+            />
           ),
         }}
       />
@@ -91,7 +133,22 @@ function TabBarIcon(props: {
   color: string;
   size: number;
 }) {
-  return <MaterialCommunityIcons style={{ marginBottom: -3 }} {...props} />;
+  return (
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: Colors.dark.text,
+        borderRadius: 50,
+        width: props.size * 2,
+        height: props.size * 2,
+        borderWidth: 1,
+        borderColor: "gray",
+      }}
+    >
+      <MaterialCommunityIcons style={{ marginBottom: -3 }} {...props} />
+    </View>
+  );
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
