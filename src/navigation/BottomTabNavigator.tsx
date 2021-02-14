@@ -49,7 +49,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
-              name="home"
+              name="human-male-female"
               color={focused ? "red" : color}
             />
           ),
