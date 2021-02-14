@@ -5,10 +5,10 @@ export type RootStackParamList = {
   
   export type BottomTabParamList = {
     Home:undefined;
-    Discover: undefined;
+    Maps: undefined;
     Share: undefined;
-    Subscriptions:undefined;
-    Library:undefined;
+    Notification:undefined;
+    Profile:undefined;
   };
   
   export type HomeParamList = {
@@ -16,18 +16,18 @@ export type RootStackParamList = {
     WatchVideoScreen:undefined;
   };
   
-  export type DiscoverParamList = {
-    DiscoverScreen: undefined;
+  export type MapsParamList = {
+    MapsScreen: undefined;
   };
   export type ShareParamList = {
     ShareScreen: undefined;
   };
   
-  export type SubscriptionsParamList = {
-    SubscriptionsScreen: undefined;
+  export type NotificationParamList = {
+    NotificationScreen: undefined;
   };
-  export type LibraryParamList = {
-    LibraryScreen: undefined;
+  export type ProfileParamList = {
+    ProfileScreen: undefined;
   };
   
   

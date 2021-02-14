@@ -7,25 +7,23 @@ import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import {
   BottomTabParamList,
-  DiscoverParamList,
   HomeParamList,
-  LibraryParamList,
   ShareParamList,
-  SubscriptionsParamList,
+  MapsParamList,
+  NotificationParamList,
+  ProfileParamList,
 } from "../navigation/Types";
-import DiscoverScreen from "../screens/DiscoverScreen";
 import ShareScreen from "../screens/ShareScreen";
-import SubscriptionsScreen from "../screens/SubscriptionsScreen";
-import LibraryScreen from "../screens/Libraryscreen";
-import WatchVideoScreen from "../screens/WatchVideoScreen";
 import Layout from "../constants/Layout";
 import { View, ImageBackground } from "react-native";
+import MapsScreen from "../screens/MapsScreen";
+import NotificationScreen from "../screens/NotificationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -52,14 +50,14 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="home"
-              color={color}
+              color={focused ? "red" : color}
             />
           ),
         }}
       />
       <BottomTab.Screen
-        name="Discover"
-        component={DiscoverNavigator}
+        name="Maps"
+        component={MapsNavigator}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
@@ -85,8 +83,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Subscriptions"
-        component={SubscriptionsNavigator}
+        name="Notification"
+        component={NotificationNavigator}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
@@ -99,8 +97,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Library"
-        component={LibraryNavigator}
+        name="Profile"
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ focused, size }) => (
             <ImageBackground
@@ -162,25 +160,20 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <HomeStack.Screen
-        name="WatchVideoScreen"
-        component={WatchVideoScreen}
-        options={{ headerShown: false }}
-      />
     </HomeStack.Navigator>
   );
 }
 
-const DiscoverStack = createStackNavigator<DiscoverParamList>();
-function DiscoverNavigator() {
+const MapsStack = createStackNavigator<MapsParamList>();
+function MapsNavigator() {
   return (
-    <DiscoverStack.Navigator>
-      <DiscoverStack.Screen
-        name="DiscoverScreen"
-        component={DiscoverScreen}
+    <MapsStack.Navigator>
+      <MapsStack.Screen
+        name="MapsScreen"
+        component={MapsScreen}
         options={{ headerTitle: "Tab Two Title" }}
       />
-    </DiscoverStack.Navigator>
+    </MapsStack.Navigator>
   );
 }
 
@@ -197,28 +190,28 @@ function ShareNavigator() {
   );
 }
 
-const SubscriptionsStack = createStackNavigator<SubscriptionsParamList>();
-function SubscriptionsNavigator() {
+const NotificationStack = createStackNavigator<NotificationParamList>();
+function NotificationNavigator() {
   return (
-    <SubscriptionsStack.Navigator>
-      <SubscriptionsStack.Screen
-        name="SubscriptionsScreen"
-        component={SubscriptionsScreen}
+    <NotificationStack.Navigator>
+      <NotificationStack.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
         options={{ headerTitle: "Tab Two Title" }}
       />
-    </SubscriptionsStack.Navigator>
+    </NotificationStack.Navigator>
   );
 }
 
-const LibraryStack = createStackNavigator<LibraryParamList>();
-function LibraryNavigator() {
+const ProfileStack = createStackNavigator<ProfileParamList>();
+function ProfileNavigator() {
   return (
-    <LibraryStack.Navigator>
-      <LibraryStack.Screen
-        name="LibraryScreen"
-        component={LibraryScreen}
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{ headerTitle: "Tab Two Title" }}
       />
-    </LibraryStack.Navigator>
+    </ProfileStack.Navigator>
   );
 }
