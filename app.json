@@ -1,0 +1,12 @@
+{
+  "name": "Filinta",
+  "displayName": "Filinta",
+  "expo": {
+    "name": "Filinta",
+    "slug": "Filinta",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
