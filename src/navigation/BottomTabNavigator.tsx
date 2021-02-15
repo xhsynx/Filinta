@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../constants/Colors";
@@ -20,8 +20,8 @@ import MapsScreen from "../screens/MapsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
-import AppHeader from "../components/AppHeader";
 import { TouchableOpacity } from "react-native";
+import { MonoText } from "../components/StyledText";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -162,10 +162,57 @@ function HomeNavigator() {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{
-          headerTitle: (props) => <AppHeader {...props} />,
+        options={({ navigation, route }) => ({
+          headerTitle: "",
           headerStyle: { backgroundColor: Colors[colorScheme].background },
-        }}
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("HomeScreen");
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <MaterialCommunityIcons name="heart" color="red" size={16} />
+                <MaterialCommunityIcons
+                  name="human-male-female"
+                  color="red"
+                  size={32}
+                />
+                <MaterialCommunityIcons name="heart" color="red" size={16} />
+                <MonoText
+                  style={{ fontWeight: "bold", fontSize: 24, color: "red" }}
+                >
+                  Filinta
+                </MonoText>
+              </View>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-around",
+              }}
+              onPress={() => {
+                navigation.navigate("SearchScreen");
+              }}
+            >
+              <EvilIcons
+                style={{ padding: 10 }}
+                name="search"
+                color={Colors.light.tabIconDefault}
+                size={24}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
       <HomeStack.Screen
         name="SearchScreen"
@@ -231,7 +278,12 @@ function ProfileNavigator() {
           headerStyle: { backgroundColor: Colors[colorScheme].background },
           headerRight: () => (
             <TouchableOpacity
-              style={{ padding: 10, marginRight: 10,backgroundColor:Colors[colorScheme].softGrey,borderRadius:50 }}
+              style={{
+                padding: 10,
+                marginRight: 10,
+                backgroundColor: Colors[colorScheme].softGrey,
+                borderRadius: 50,
+              }}
               onPress={() => {
                 navigation.navigate("SettingScreen");
               }}
