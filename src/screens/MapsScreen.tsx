@@ -7,7 +7,19 @@ import Layout from "../constants/Layout";
 export default function MapsScreen() {
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} />
+      <MapView
+        provider="google"
+        style={styles.map}
+        region={{
+          latitude: 0,
+          longitude: 0,
+          latitudeDelta: 0,
+          longitudeDelta: 30,
+        }}
+        zoomEnabled={true}
+        showsUserLocation={true}
+        zoomTapEnabled={true}
+      />
     </View>
   );
 }
@@ -18,8 +30,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   map: {
-    flex:1,
+    flex: 1,
     width: Layout.window.width,
-    height: Layout.window.height
+    height: Layout.window.height,
   },
 });
