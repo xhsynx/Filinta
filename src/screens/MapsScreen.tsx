@@ -11,10 +11,10 @@ export default function MapsScreen() {
         provider="google"
         style={styles.map}
         region={{
-          latitude: 0,
-          longitude: 0,
-          latitudeDelta: 0,
-          longitudeDelta: 30,
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
         }}
         zoomEnabled={true}
         showsUserLocation={true}
@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   map: {
-    flex: 1,
-    width: Layout.window.width,
-    height: Layout.window.height,
+    ...StyleSheet.absoluteFillObject,
   },
 });
