@@ -171,7 +171,7 @@ function MapsNavigator() {
       <MapsStack.Screen
         name="MapsScreen"
         component={MapsScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={{ headerShown: false }}
       />
     </MapsStack.Navigator>
   );

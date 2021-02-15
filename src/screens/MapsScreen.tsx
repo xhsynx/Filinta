@@ -2,6 +2,7 @@ import * as React from "react";
 import MapView from "react-native-maps";
 import { StyleSheet, Dimensions } from "react-native";
 import { Text, View } from "../components/Themed";
+import Layout from "../constants/Layout";
 
 export default function MapsScreen() {
   return (
@@ -13,12 +14,12 @@ export default function MapsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    flex:1,
+    width: Layout.window.width,
+    height: Layout.window.height
   },
 });
