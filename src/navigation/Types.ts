@@ -13,7 +13,7 @@ export type RootStackParamList = {
   
   export type HomeParamList = {
     HomeScreen: undefined;
-    WatchVideoScreen:undefined;
+    SearchScreen:undefined;
   };
   
   export type MapsParamList = {

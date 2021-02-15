@@ -46,11 +46,14 @@ export default function AppHeader(props: StackHeaderTitleProps) {
         </View>
       </TouchableOpacity>
 
-      <View
+      <TouchableOpacity
         style={{
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-around",
+        }}
+        onPress={() => {
+          navigation.navigate("SearchScreen");
         }}
       >
         <EvilIcons
@@ -59,7 +62,7 @@ export default function AppHeader(props: StackHeaderTitleProps) {
           color={Colors.light.tabIconDefault}
           size={24}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

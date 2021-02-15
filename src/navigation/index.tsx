@@ -6,9 +6,6 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
-import AppHeader from "../components/AppHeader";
-import Colors from "../constants/Colors";
-
 import { RootStackParamList } from "../navigation/Types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -35,12 +32,10 @@ export default function Navigation({
 const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const colorScheme = useColorScheme();
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: (props) => <AppHeader {...props} />,
-        headerStyle: { backgroundColor: Colors[colorScheme].background },
+        headerShown: false,
       }}
     >
       <Stack.Screen name="Root" component={BottomTabNavigator} />

@@ -19,6 +19,9 @@ import { View, ImageBackground } from "react-native";
 import MapsScreen from "../screens/MapsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import SearchScreen from "../screens/SearchScreen";
+import AppHeader from "../components/AppHeader";
+import { TouchableOpacity } from "react-native";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -153,12 +156,24 @@ function TabBarIcon(props: {
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const HomeStack = createStackNavigator<HomeParamList>();
 function HomeNavigator() {
+  const colorScheme = useColorScheme();
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerTitle: (props) => <AppHeader {...props} />,
+          headerStyle: { backgroundColor: Colors[colorScheme].background },
+        }}
+      />
+      <HomeStack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={({ navigation, route }) => ({
+          headerShown: true,
+          headerStyle: { backgroundColor: Colors[colorScheme].background },
+        })}
       />
     </HomeStack.Navigator>
   );
@@ -197,7 +212,6 @@ function NotificationNavigator() {
       <NotificationStack.Screen
         name="NotificationScreen"
         component={NotificationScreen}
-        options={{ headerTitle: "Tab Two Title" }}
       />
     </NotificationStack.Navigator>
   );
@@ -205,12 +219,27 @@ function NotificationNavigator() {
 
 const ProfileStack = createStackNavigator<ProfileParamList>();
 function ProfileNavigator() {
+  const colorScheme = useColorScheme();
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={({ navigation, route }) => ({
+          headerShown: true,
+          headerTitle: "",
+          headerStyle: { backgroundColor: Colors[colorScheme].background },
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ padding: 10, marginRight: 10,backgroundColor:Colors[colorScheme].softGrey,borderRadius:50 }}
+              onPress={() => {
+                navigation.navigate("SettingScreen");
+              }}
+            >
+              <MaterialCommunityIcons size={24} name="cog" color="white" />
+            </TouchableOpacity>
+          ),
+        })}
       />
     </ProfileStack.Navigator>
   );

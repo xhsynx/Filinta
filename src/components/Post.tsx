@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export const Post = (props: { post: IPost }) => {
   const navigation = useNavigation();
+  const [liked, setLiked] = useState(false);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   return (
     <View
@@ -154,13 +155,13 @@ export const Post = (props: { post: IPost }) => {
         <TouchableOpacity
           style={{ marginBottom: -30 }}
           onPress={() => {
-            //navigation.navigate("ProfileScreen");
+            setLiked(!liked);
           }}
         >
           <View style={{ backgroundColor: "transparent" }}>
             <MaterialCommunityIcons
               name="heart-multiple"
-              color="#212121"
+              color={liked ? "red" : "#424242"}
               size={60}
             />
           </View>
@@ -180,7 +181,7 @@ export const Post = (props: { post: IPost }) => {
             backgroundColor: "black",
             marginTop: "auto",
             borderTopLeftRadius: 50,
-            borderTopRightRadius:50,
+            borderTopRightRadius: 50,
             paddingVertical: 30,
             paddingHorizontal: 20,
           }}
@@ -196,7 +197,7 @@ export const Post = (props: { post: IPost }) => {
               alignItems: "center",
               backgroundColor: "red",
             }}
-            onPress={()=>{
+            onPress={() => {
               setProfileModalVisible(!profileModalVisible);
             }}
           >
@@ -205,12 +206,14 @@ export const Post = (props: { post: IPost }) => {
           <View style={{ backgroundColor: "transparent" }}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>DerinSu 19</Text>
           </View>
-          <View style={{flexDirection:"row", backgroundColor: "transparent" }}>
+          <View
+            style={{ flexDirection: "row", backgroundColor: "transparent" }}
+          >
             <MaterialCommunityIcons
               name="gender-male-female"
               color="white"
               size={12}
-              style={{marginRight:5}}
+              style={{ marginRight: 5 }}
             />
             <Text>Kadın</Text>
           </View>
@@ -248,7 +251,7 @@ export const Post = (props: { post: IPost }) => {
                 name="map-marker"
                 color="white"
                 size={12}
-                style={{marginRight:5}}
+                style={{ marginRight: 5 }}
               />
               <Text>13 km uzakta</Text>
             </View>
@@ -281,7 +284,7 @@ export const Post = (props: { post: IPost }) => {
             })}
           </View>
 
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
+          <View style={{ flexDirection: "row", alignSelf: "center",backgroundColor:"transparent" }}>
             <TouchableOpacity
               style={{
                 alignSelf: "center",
