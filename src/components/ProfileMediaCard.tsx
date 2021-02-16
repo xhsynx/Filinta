@@ -29,7 +29,7 @@ export const ProfileMediaCard = (props: { post: IPost }) => {
       >
         <Text
           style={{
-            backgroundColor: Colors[colorScheme].softGrey,
+            backgroundColor: Colors[colorScheme].logo,
             borderRadius: 10,
             margin: 3,
             padding: 3,

@@ -80,7 +80,7 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="plus-circle-outline"
-              color={focused ? "#4caf50" : color}
+              color={focused ? Colors[colorScheme].iconColor : color}
             />
           ),
         }}
@@ -93,10 +93,12 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="heart"
-              color={focused ? "red" : color}
+              color={focused ? Colors[colorScheme].red : Colors[colorScheme].tabIconDefault }
             />
           ),
           tabBarBadge: 47,
+          tabBarBadgeStyle:{color:Colors[colorScheme].badgeText,backgroundColor:"red"}
+          
         }}
       />
       <BottomTab.Screen
@@ -116,8 +118,8 @@ export default function BottomTabNavigator() {
               }}
               imageStyle={{
                 borderRadius: 50,
-                borderWidth: focused ? 3 : 1,
-                borderColor: "gray",
+                borderWidth: 1,
+                borderColor: Colors[colorScheme].iconColor,
               }}
             />
           ),
@@ -134,20 +136,21 @@ function TabBarIcon(props: {
   color: string;
   size: number;
 }) {
+  const colorScheme = useColorScheme();
   return (
     <View
       style={{
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: Colors.dark.text,
+        backgroundColor: Colors[colorScheme].circle,
         borderRadius: 50,
         width: props.size * 2,
         height: props.size * 2,
         borderWidth: 1,
-        borderColor: "gray",
+        borderColor: Colors[colorScheme].iconColor,
       }}
     >
-      <MaterialCommunityIcons style={{ marginBottom: -3 }} {...props} />
+      <MaterialCommunityIcons {...props} />
     </View>
   );
 }
@@ -164,7 +167,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={({ navigation, route }) => ({
           headerTitle: "",
-          headerStyle: { backgroundColor: Colors[colorScheme].background },
+          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
@@ -178,15 +181,27 @@ function HomeNavigator() {
                   alignItems: "center",
                 }}
               >
-                <MaterialCommunityIcons name="heart" color="red" size={16} />
+                <MaterialCommunityIcons
+                  name="heart"
+                  color={Colors[colorScheme].iconColor}
+                  size={16}
+                />
                 <MaterialCommunityIcons
                   name="human-male-female"
-                  color="red"
+                  color={Colors[colorScheme].iconColor}
                   size={32}
                 />
-                <MaterialCommunityIcons name="heart" color="red" size={16} />
+                <MaterialCommunityIcons
+                  name="heart"
+                  color={Colors[colorScheme].iconColor}
+                  size={16}
+                />
                 <MonoText
-                  style={{ fontWeight: "bold", fontSize: 24, color: "red" }}
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 24,
+                    color: Colors[colorScheme].logo,
+                  }}
                 >
                   Filinta
                 </MonoText>
@@ -207,7 +222,7 @@ function HomeNavigator() {
               <EvilIcons
                 style={{ padding: 10 }}
                 name="search"
-                color={Colors.light.tabIconDefault}
+                color={Colors[colorScheme].iconColor}
                 size={24}
               />
             </TouchableOpacity>
@@ -219,7 +234,7 @@ function HomeNavigator() {
         component={SearchScreen}
         options={({ navigation, route }) => ({
           headerShown: true,
-          headerStyle: { backgroundColor: Colors[colorScheme].background },
+          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
         })}
       />
     </HomeStack.Navigator>
@@ -275,20 +290,24 @@ function ProfileNavigator() {
         options={({ navigation, route }) => ({
           headerShown: true,
           headerTitle: "",
-          headerStyle: { backgroundColor: Colors[colorScheme].background },
+          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
           headerRight: () => (
             <TouchableOpacity
               style={{
                 padding: 10,
                 marginRight: 10,
-                backgroundColor: Colors[colorScheme].softGrey,
+                backgroundColor: Colors[colorScheme].circle,
                 borderRadius: 50,
               }}
               onPress={() => {
                 navigation.navigate("SettingScreen");
               }}
             >
-              <MaterialCommunityIcons size={24} name="cog" color="white" />
+              <MaterialCommunityIcons
+                size={24}
+                name="cog"
+                color={Colors[colorScheme].iconColor}
+              />
             </TouchableOpacity>
           ),
         })}

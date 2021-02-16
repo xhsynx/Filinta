@@ -28,7 +28,7 @@ export default function ProfileScreen() {
             imageStyle={{
               borderRadius: 50,
               borderWidth: 1,
-              borderColor: Colors[colorScheme].softGrey,
+              borderColor: Colors[colorScheme].buttonBorder,
             }}
             style={{
               width: 100,
@@ -49,7 +49,7 @@ export default function ProfileScreen() {
             style={{
               width: 60,
               height: 60,
-              backgroundColor: Colors[colorScheme].text,
+              backgroundColor: Colors[colorScheme].bottomTabsBg,
               borderRadius: 50,
               justifyContent: "center",
               alignItems: "center",
@@ -59,7 +59,7 @@ export default function ProfileScreen() {
             <MaterialCommunityIcons
               size={32}
               name="camera-plus"
-              color={Colors[colorScheme].softGrey}
+              color={Colors[colorScheme].iconColor}
             />
           </TouchableOpacity>
           <Text>MEDYA EKLE</Text>
@@ -83,20 +83,21 @@ export default function ProfileScreen() {
             width: Layout.window.width - 20,
             height: 50,
             borderWidth:1,
-            backgroundColor: Colors[colorScheme].softGrey,
+            backgroundColor: Colors[colorScheme].bottomTabsBg,
+            borderColor:Colors[colorScheme].bottomTabsBg,
           }}
         >
           <Text
             style={{
               fontWeight: "bold",
               fontSize: 16,
-              color: "white",
+              color: Colors[colorScheme].logo,
               marginHorizontal: 5,
             }}
           >
            GALERİ
           </Text>
-          <MaterialCommunityIcons name="table-edit" size={32} color="white" />
+          <MaterialCommunityIcons name="table-edit" size={32} color={Colors[colorScheme].iconColor}/>
         </TouchableOpacity>
       </View>
       <FlatList
@@ -107,7 +108,7 @@ export default function ProfileScreen() {
         horizontal
         style={{marginHorizontal:20,borderRadius:10,marginBottom:40}}
         showsHorizontalScrollIndicator
-        indicatorStyle="white"
+        indicatorStyle="default"
         keyExtractor={(post) => post.id}
       />
 
