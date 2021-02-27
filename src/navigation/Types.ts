@@ -28,6 +28,10 @@ export type RootStackParamList = {
   };
   export type ProfileParamList = {
     ProfileScreen: undefined;
+    ProfileDrawer:undefined;
   };
-  
+  export type ProfileDrawerParamList = {
+    ProfileScreen:undefined;
+    EditProfileScreen: undefined;
+  };
   

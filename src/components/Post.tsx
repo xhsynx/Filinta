@@ -6,8 +6,11 @@ import Layout from "../constants/Layout";
 import IPost from "../interfaces/IPost";
 import { EvilIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import useColorScheme from "../hooks/useColorScheme";
+import Colors from "../constants/Colors";
 
 export const Post = (props: { post: IPost }) => {
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const [liked, setLiked] = useState(false);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
@@ -74,7 +77,7 @@ export const Post = (props: { post: IPost }) => {
                     borderColor: "#212121",
                   }}
                 />
-                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                <Text style={{ fontSize: 20, fontWeight: "bold" , color: Colors[colorScheme].primarycontrastText,}}>
                   DerinSu 19
                 </Text>
                 <MaterialCommunityIcons
@@ -102,7 +105,7 @@ export const Post = (props: { post: IPost }) => {
                       marginRight: 5,
                     }}
                   />
-                  <Text>Son zamanlarda aktif</Text>
+                  <Text style={{color: Colors[colorScheme].primarycontrastText,}}>Son zamanlarda aktif</Text>
                 </View>
 
                 <View
@@ -118,7 +121,7 @@ export const Post = (props: { post: IPost }) => {
                     color="white"
                     size={12}
                   />
-                  <Text>13 km uzakta</Text>
+                  <Text style={{color: Colors[colorScheme].primarycontrastText,}}>13 km uzakta</Text>
                 </View>
               </View>
             </View>
@@ -140,13 +143,13 @@ export const Post = (props: { post: IPost }) => {
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
-                  backgroundColor: "#212121",
+                  backgroundColor: Colors[colorScheme].secondarylight,
                   borderRadius: 50,
                   padding: 8,
                   margin: 3,
                 }}
               >
-                <Text style={{ fontWeight: "bold" }}>{tag}</Text>
+                <Text style={{ fontWeight: "bold", color: Colors[colorScheme].secondarycontrastText, }}>{tag}</Text>
               </TouchableOpacity>
             );
           })}
@@ -161,7 +164,7 @@ export const Post = (props: { post: IPost }) => {
           <View style={{ backgroundColor: "transparent" }}>
             <MaterialCommunityIcons
               name="heart-multiple"
-              color={liked ? "red" : "#424242"}
+              color={liked ? "red" : Colors[colorScheme].secondarylight}
               size={60}
             />
           </View>
@@ -178,7 +181,7 @@ export const Post = (props: { post: IPost }) => {
         <View
           style={{
             height: Layout.window.height / 3,
-            backgroundColor: "black",
+            backgroundColor: Colors[colorScheme].primarymain,
             marginTop: "auto",
             borderTopLeftRadius: 50,
             borderTopRightRadius: 50,
@@ -195,13 +198,14 @@ export const Post = (props: { post: IPost }) => {
               marginTop: -50,
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: "red",
+              backgroundColor: Colors[colorScheme].secondarylight,
+              width:40,height:40
             }}
             onPress={() => {
               setProfileModalVisible(!profileModalVisible);
             }}
           >
-            <MaterialCommunityIcons name="close" color="black" size={32} />
+            <MaterialCommunityIcons name="close" color={Colors[colorScheme].secondarycontrastText} size={32} />
           </TouchableOpacity>
           <View style={{ backgroundColor: "transparent" }}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>DerinSu 19</Text>
@@ -211,7 +215,7 @@ export const Post = (props: { post: IPost }) => {
           >
             <MaterialCommunityIcons
               name="gender-male-female"
-              color="white"
+              color={Colors[colorScheme].secondarylight}
               size={12}
               style={{ marginRight: 5 }}
             />
@@ -249,7 +253,7 @@ export const Post = (props: { post: IPost }) => {
             >
               <MaterialCommunityIcons
                 name="map-marker"
-                color="white"
+                color={Colors[colorScheme].secondarylight}
                 size={12}
                 style={{ marginRight: 5 }}
               />
@@ -272,13 +276,13 @@ export const Post = (props: { post: IPost }) => {
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "#212121",
+                    backgroundColor: Colors[colorScheme].secondarylight,
                     borderRadius: 50,
                     padding: 8,
                     margin: 3,
                   }}
                 >
-                  <Text style={{ fontWeight: "bold" }}>{tag}</Text>
+                  <Text style={{ fontWeight: "bold",color:Colors[colorScheme].secondarycontrastText }}>{tag}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -359,7 +363,7 @@ export const Post = (props: { post: IPost }) => {
               alignItems: "center",
             }}
           >
-            <Text>Kötüye Kullanım Bildir</Text>
+            <Text>Kötüye Kullanım Bildir!</Text>
           </TouchableOpacity>
         </View>
       </Modal>

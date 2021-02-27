@@ -12,10 +12,12 @@ import useColorScheme from "../hooks/useColorScheme";
 import Layout from "../constants/Layout";
 import { StoreContext } from "../store/store";
 import { ProfileMediaCard } from "../components/ProfileMediaCard";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
   const { state } = useContext(StoreContext);
   const colorScheme = useColorScheme();
+  const navigation=useNavigation()
   return (
     <View style={styles.container}>
       <View style={{ height: Layout.window.height / 3 }}>
@@ -28,7 +30,7 @@ export default function ProfileScreen() {
             imageStyle={{
               borderRadius: 50,
               borderWidth: 1,
-              borderColor: Colors[colorScheme].buttonBorder,
+              borderColor: Colors[colorScheme].secondarydark,
             }}
             style={{
               width: 100,
@@ -49,7 +51,7 @@ export default function ProfileScreen() {
             style={{
               width: 60,
               height: 60,
-              backgroundColor: Colors[colorScheme].bottomTabsBg,
+              backgroundColor: Colors[colorScheme].secondarylight,
               borderRadius: 50,
               justifyContent: "center",
               alignItems: "center",
@@ -59,7 +61,7 @@ export default function ProfileScreen() {
             <MaterialCommunityIcons
               size={32}
               name="camera-plus"
-              color={Colors[colorScheme].iconColor}
+              color={Colors[colorScheme].secondarycontrastText}
             />
           </TouchableOpacity>
           <Text>MEDYA EKLE</Text>
@@ -83,21 +85,24 @@ export default function ProfileScreen() {
             width: Layout.window.width - 20,
             height: 50,
             borderWidth:1,
-            backgroundColor: Colors[colorScheme].bottomTabsBg,
-            borderColor:Colors[colorScheme].bottomTabsBg,
+            backgroundColor: Colors[colorScheme].secondarylight,
+            borderColor:Colors[colorScheme].secondarylight,
+          }}
+          onPress={()=>{
+            navigation.navigate("EditProfileScreen");
           }}
         >
           <Text
             style={{
               fontWeight: "bold",
               fontSize: 16,
-              color: Colors[colorScheme].logo,
+              color: Colors[colorScheme].secondarycontrastText,
               marginHorizontal: 5,
             }}
           >
            GALERİ
           </Text>
-          <MaterialCommunityIcons name="table-edit" size={32} color={Colors[colorScheme].iconColor}/>
+          <MaterialCommunityIcons name="table-edit" size={32} color={Colors[colorScheme].secondarylight}/>
         </TouchableOpacity>
       </View>
       <FlatList

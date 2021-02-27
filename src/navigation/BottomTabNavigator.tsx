@@ -1,6 +1,7 @@
 import * as React from "react";
 import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -12,6 +13,7 @@ import {
   MapsParamList,
   NotificationParamList,
   ProfileParamList,
+  ProfileDrawerParamList,
 } from "../navigation/Types";
 import ShareScreen from "../screens/ShareScreen";
 import Layout from "../constants/Layout";
@@ -22,6 +24,8 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
 import { TouchableOpacity } from "react-native";
 import { MonoText } from "../components/StyledText";
+import EditProfileScreen from "../screens/EditProfileScreen";
+import { DrawerActions } from "@react-navigation/native";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -31,17 +35,19 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: Colors[colorScheme].background,
+        activeTintColor: Colors[colorScheme].secondarycontrastText,
         tabStyle: {
-          backgroundColor: Colors[colorScheme].bottomTabsBg,
+          backgroundColor: Colors[colorScheme].primarymain,
           marginBottom: 5,
         },
         showLabel: false,
-        inactiveTintColor: Colors[colorScheme].tabIconDefault,
+        inactiveTintColor: Colors[colorScheme].secondarycontrastText,
         style: {
-          backgroundColor: Colors[colorScheme].background,
+          backgroundColor: Colors[colorScheme].primarymain,
           borderTopWidth: 0,
           height: 80,
+          borderTopRightRadius: 50,
+          borderTopLeftRadius: 50,
         },
       }}
     >
@@ -53,7 +59,7 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="human-male-female"
-              color={focused ? "red" : color}
+              color={color}
             />
           ),
         }}
@@ -66,7 +72,7 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="map-marker"
-              color={focused ? "#4285F4" : color}
+              color={color}
             />
           ),
         }}
@@ -80,7 +86,7 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="plus-circle-outline"
-              color={focused ? Colors[colorScheme].iconColor : color}
+              color={color}
             />
           ),
         }}
@@ -93,12 +99,14 @@ export default function BottomTabNavigator() {
             <TabBarIcon
               size={focused ? Layout.tabIconBigSize : Layout.tabIconSmallSize}
               name="heart"
-              color={focused ? Colors[colorScheme].red : Colors[colorScheme].tabIconDefault }
+              color={color}
             />
           ),
           tabBarBadge: 47,
-          tabBarBadgeStyle:{color:Colors[colorScheme].badgeText,backgroundColor:"red"}
-          
+          tabBarBadgeStyle: {
+            color: Colors[colorScheme].secondarycontrastText,
+            backgroundColor: Colors[colorScheme].secondarylight,
+          },
         }}
       />
       <BottomTab.Screen
@@ -119,11 +127,19 @@ export default function BottomTabNavigator() {
               imageStyle={{
                 borderRadius: 50,
                 borderWidth: 1,
-                borderColor: Colors[colorScheme].iconColor,
+                borderColor: Colors[colorScheme].secondarymain,
               }}
             />
           ),
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: e => {
+            // Prevent default action
+            e.preventDefault();
+            
+            navigation.navigate('ProfileScreen');
+          },
+        })}
       />
     </BottomTab.Navigator>
   );
@@ -142,12 +158,12 @@ function TabBarIcon(props: {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: Colors[colorScheme].circle,
+        backgroundColor: Colors[colorScheme].secondarylight,
         borderRadius: 50,
         width: props.size * 2,
         height: props.size * 2,
         borderWidth: 1,
-        borderColor: Colors[colorScheme].iconColor,
+        borderColor: Colors[colorScheme].secondarydark,
       }}
     >
       <MaterialCommunityIcons {...props} />
@@ -167,7 +183,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={({ navigation, route }) => ({
           headerTitle: "",
-          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
+          headerStyle: { backgroundColor: Colors[colorScheme].primarymain },
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
@@ -183,24 +199,24 @@ function HomeNavigator() {
               >
                 <MaterialCommunityIcons
                   name="heart"
-                  color={Colors[colorScheme].iconColor}
+                  color={Colors[colorScheme].secondarylight}
                   size={16}
                 />
                 <MaterialCommunityIcons
                   name="human-male-female"
-                  color={Colors[colorScheme].iconColor}
+                  color={Colors[colorScheme].secondarylight}
                   size={32}
                 />
                 <MaterialCommunityIcons
                   name="heart"
-                  color={Colors[colorScheme].iconColor}
+                  color={Colors[colorScheme].secondarylight}
                   size={16}
                 />
                 <MonoText
                   style={{
                     fontWeight: "bold",
                     fontSize: 24,
-                    color: Colors[colorScheme].logo,
+                    color: Colors[colorScheme].secondarylight,
                   }}
                 >
                   Filinta
@@ -222,7 +238,7 @@ function HomeNavigator() {
               <EvilIcons
                 style={{ padding: 10 }}
                 name="search"
-                color={Colors[colorScheme].iconColor}
+                color={Colors[colorScheme].secondarydark}
                 size={24}
               />
             </TouchableOpacity>
@@ -234,7 +250,7 @@ function HomeNavigator() {
         component={SearchScreen}
         options={({ navigation, route }) => ({
           headerShown: true,
-          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
+          headerStyle: { backgroundColor: Colors[colorScheme].primarymain },
         })}
       />
     </HomeStack.Navigator>
@@ -279,34 +295,44 @@ function NotificationNavigator() {
   );
 }
 
+const ProfileDrawer = createDrawerNavigator<ProfileDrawerParamList>();
+function ProfileDrawerNavigator() {
+
+  return (
+    <ProfileDrawer.Navigator drawerPosition="right" initialRouteName="ProfileScreen">
+      <ProfileDrawer.Screen name="ProfileScreen" component={ProfileScreen} />
+      <ProfileDrawer.Screen name="EditProfileScreen" component={EditProfileScreen} />
+    </ProfileDrawer.Navigator>
+  );
+}
+
 const ProfileStack = createStackNavigator<ProfileParamList>();
 function ProfileNavigator() {
   const colorScheme = useColorScheme();
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="ProfileDrawer"
+        component={ProfileDrawerNavigator}
         options={({ navigation, route }) => ({
           headerShown: true,
           headerTitle: "",
-          headerStyle: { backgroundColor: Colors[colorScheme].topHeaderBg },
+          headerStyle: { backgroundColor: Colors[colorScheme].primarymain },
           headerRight: () => (
             <TouchableOpacity
               style={{
                 padding: 10,
                 marginRight: 10,
-                backgroundColor: Colors[colorScheme].circle,
                 borderRadius: 50,
               }}
               onPress={() => {
-                navigation.navigate("SettingScreen");
+                navigation.dispatch(DrawerActions.openDrawer());
               }}
             >
               <MaterialCommunityIcons
                 size={24}
-                name="cog"
-                color={Colors[colorScheme].iconColor}
+                name="menu"
+                color={Colors[colorScheme].secondarylight}
               />
             </TouchableOpacity>
           ),

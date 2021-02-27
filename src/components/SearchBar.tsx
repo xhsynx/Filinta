@@ -9,7 +9,7 @@ export const SearchBar = (props: any) => {
   return (
     <View
       style={{
-        backgroundColor: Colors[colorScheme].background,
+        backgroundColor: Colors[colorScheme].secondarymain,
         alignItems: "center",
       }}
     >

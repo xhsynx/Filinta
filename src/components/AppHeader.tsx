@@ -18,7 +18,7 @@ export default function AppHeader(props: StackHeaderTitleProps) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: Colors[colorScheme].background,
+        backgroundColor: Colors[colorScheme].primarymain,
       }}
     >
       <TouchableOpacity
@@ -59,7 +59,7 @@ export default function AppHeader(props: StackHeaderTitleProps) {
         <EvilIcons
           style={{ padding: 10 }}
           name="search"
-          color={Colors.light.tabIconDefault}
+          color={Colors.light.secondarymain}
           size={24}
         />
       </TouchableOpacity>
